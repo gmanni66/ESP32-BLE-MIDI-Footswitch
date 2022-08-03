@@ -1,3 +1,5 @@
+
+#include <SPI.h>
 #include <Control_Surface.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
@@ -24,25 +26,22 @@ CCButtonLatched button5 {27, 69}; // {pin №, CC №}
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 
-void initDisplay() {
-  Serial.println("Init display");
-  // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
-  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Address 0x3D for 128x64
-    Serial.println(F("SSD1306 allocation failed"));
-    for (;;); // Don't proceed, loop forever
-  }
-  // Clear the buffer
-  display.clearDisplay();  //Clear the buffer first so we don't see Adafruit splash
-  display.display();
-  display.setTextColor(SSD1306_WHITE);
-  display.print("Control Surface");
-}
-
 
 void setup() { 
   Control_Surface.begin();
   Wire.begin(0,4);
-  initDisplay();
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+  // text display tests
+  display.clearDisplay();
+  display.setTextSize(2);             // Normal 1:1 pixel scale
+  display.setTextColor(SSD1306_WHITE);        // Draw white text
+  display.setCursor(25,0);             // Start at top-left corner
+  display.println(F("CChange"));
+  display.setCursor(12,25); 
+  display.print("BLE_MIDI");
+  display.setCursor(12,40); 
+  display.print("Control");   
+  display.display();
   }
 
 void loop() { Control_Surface.loop(); }
