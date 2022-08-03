@@ -24,15 +24,6 @@ CCButtonLatched button5 {27, 69}; // {pin №, CC №}
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 
-//void displayMessage() {
-//  // Clear the buffer
-//  display.clearDisplay();
-//// display.setTextSize(fontSize);
-//  display.setCursor(0, 0);
-////  display.print(message);
-//  display.display(); // actually display all of the above
-//}
-
 void initDisplay() {
   Serial.println("Init display");
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
